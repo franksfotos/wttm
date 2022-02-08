@@ -104,7 +104,7 @@ function nextcards() {
         document.getElementById(tag).innerHTML = card[0] + "<span><img width='30' height='30' src='./img/"+ nextCard[1]+".png' class='preview'></span>"
         
         tag = "i" + (i+1)
-        let fn = "../img/" + card[1] + ".png"
+        let fn = "./img/" + card[1] + ".png"
         document.getElementById(tag).src = fn
     }
 }
