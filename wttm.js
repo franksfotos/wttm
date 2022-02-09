@@ -101,10 +101,14 @@ function nextcards() {
         thirdCards[i].draw()
         
         let tag = "t" + (i+1)
-        document.getElementById(tag).innerHTML = card[0] + "<span><img width='30' height='30' src='./img/"+ nextCard[1]+".png' class='preview'></span>"
-        
+        document.getElementById(tag).innerHTML = card[0] //+ "<span><img width='30' height='30' src='./img/"+ nextCard[1]+".png' class='preview'></span>"
+
         tag = "i" + (i+1)
-        let fn = "./img/" + card[1] + ".png"
+        fn = "./img/" + card[1] + ".png"
+        document.getElementById(tag).src = fn
+
+        tag = "p" + (i+1)
+        fn = "./img/" + nextCard[1] + ".png"
         document.getElementById(tag).src = fn
     }
 }
