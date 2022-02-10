@@ -208,18 +208,21 @@ function shuffledeck() {
 
 // console.log(moondeck)
 let allCards = new Deck(moondeck)
-
-// Shuffle all 63 Cards
-allCards.shuffle()
-
 let thirdCards = []
-let idx
 
-for (idx = 0; idx < 3; idx++) {
-    thirdCards.push(new Deck(allCards.deck.slice(21 * idx, 21 * idx + 21)))
+function freshStart() {
+    thirdCards = []
+    allCards.shuffle()
+    let idx
+
+    for (idx = 0; idx < 3; idx++) {
+        thirdCards.push(new Deck(allCards.deck.slice(21 * idx, 21 * idx + 21)))
+    }
+    nextcards()
 }
 
-nextcards()
+freshStart()
+
 
 
 
