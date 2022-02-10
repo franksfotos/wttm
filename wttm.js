@@ -120,23 +120,35 @@ function nextcards() {
   btn.disabled = true;
   setTimeout(()=>{
     btn.disabled = false;
-    console.log('Button Activated')}, 500)
+    //console.log('Button Activated')
+    }, 500)
+
+    // tx = Number
+    // px = Preview
+    // ix = Image
+
+    // card = topmost card -> Number (t), Preview (p)
+    // nextCard = image (i)
 
 
     cardsOnPile = thirdCards[0].drawpile.length
+    cardsOnDiscardPile = thirdCards[0].discardpile.length
+
+    document.getElementById("LastCards").innerHTML = ("Noch " + cardsOnPile + " Karten ")
+
+    console.log( thirdCards[0].drawpile.length , 'cards on pile ')
 
     if (cardsOnPile === 21) {
-        console.log( '21 Cards on Pile, Number + NextCard anzeigen')
+        console.log("21")
         for (i = 0; i < 3; i++) {
             
-            card = thirdCards[i].drawpile[cardsOnPile - 1]
-            nextCard = thirdCards[i].drawpile[cardsOnPile - 2] === undefined ? [0, 'X'] : thirdCards[i].drawpile[cardsOnPile - 2]
-
+            drawcard = thirdCards[i].drawpile[cardsOnPile - 1]
+    
             tag = "t" + (i + 1)
-            document.getElementById(tag).innerHTML = card[0]
+            document.getElementById(tag).innerHTML = drawcard[0]
 
             tag = "p" + (i + 1)
-            fn = "./img/" + nextCard[1] + ".png"
+            fn = "./img/" + drawcard[1] + ".png"
             document.getElementById(tag).src = fn
             
             tag = "i" + (i + 1)
@@ -145,23 +157,25 @@ function nextcards() {
 
             thirdCards[i].draw()
         }
-    } else 
-    if (cardsOnPile > 0) {
-        for (i = 0; i < 3; i++) {
-            console.log( thirdCards[i].drawpile.length , 'cards on pile ')
+    } else if (cardsOnPile > 1) {
+        console.log("2-20")
 
-            card = thirdCards[i].drawpile[cardsOnPile - 1]
-            nextCard = thirdCards[i].drawpile[cardsOnPile - 2] === undefined ? [0, 'X'] : thirdCards[i].drawpile[cardsOnPile - 2]
+        for (i = 0; i < 3; i++) {
+
+
+
+            drawcard = thirdCards[i].drawpile[cardsOnPile - 1]
+            discardcard = thirdCards[i].discardpile[cardsOnDiscardPile - 1] === undefined ? [0, 'X'] : thirdCards[i].discardpile[cardsOnDiscardPile - 1]
     
             tag = "t" + (i + 1)
-            document.getElementById(tag).innerHTML = card[0]
+            document.getElementById(tag).innerHTML = drawcard[0]
 
             tag = "i" + (i + 1)
-            fn = "./img/" + card[1] + ".png"
+            fn = "./img/" + discardcard[1] + ".png"
             document.getElementById(tag).src = fn
 
             tag = "p" + (i + 1)
-            fn = "./img/" + nextCard[1] + ".png"
+            fn = "./img/" + drawcard[1] + ".png"
             document.getElementById(tag).src = fn
 
             thirdCards[i].draw()
@@ -169,7 +183,36 @@ function nextcards() {
         }
     }
     else {
-        console.log("only 1 card left")
+        console.log( 'Only 1 Card on Pile')
+        for (i = 0; i < 3; i++) {
+            discardcard = thirdCards[i].discardpile[cardsOnDiscardPile - 1] === undefined ? [0, 'X'] : thirdCards[i].discardpile[cardsOnDiscardPile - 1]
+
+
+            tag = "t" + (i + 1)
+            document.getElementById(tag).innerHTML = "&nbsp;"
+    
+            tag = "p" + (i + 1)
+            fn = "./img/X.png"
+            document.getElementById(tag).src = fn
+            
+            tag = "i" + (i + 1)
+            fn = "./img/" + discardcard[1] + ".png"
+            document.getElementById(tag).src = fn
+        }
+        
+    }
+
+
+
+    
+    if (cardsOnDiscardPile > 1) {
+        lastcardstext = "Letzte Karten: "
+        for (i=0; i<3; i++) {
+            lastcardstext += thirdCards[i].discardpile[cardsOnDiscardPile-1][0] + " " + thirdCards[i].discardpile[cardsOnDiscardPile-2][1] + " "
+            
+        }
+        document.getElementById("LastCards").innerText += " / " + lastcardstext
+        console.log(lastcardstext)
     }
 
 
