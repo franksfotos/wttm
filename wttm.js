@@ -186,6 +186,7 @@ function shuffledeck() {
     for (i = 0; i < 3; i++) {
         thirdCards[i].shuffle()
     }
+    nextcards()
 }
 
 
