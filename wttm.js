@@ -109,7 +109,20 @@ class Deck {
     }
 }
 
+
+
 function nextcards() {
+  const btn = document.getElementById("btnNext")
+  const snd = document.getElementById("sndClick")
+  
+  snd.play();
+
+  btn.disabled = true;
+  setTimeout(()=>{
+    btn.disabled = false;
+    console.log('Button Activated')}, 500)
+
+
     cardsOnPile = thirdCards[0].drawpile.length
 
     if (cardsOnPile === 21) {
